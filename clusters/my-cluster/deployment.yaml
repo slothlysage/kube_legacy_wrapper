@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-perl-deployment
+  labels:
+    app: legacy-perl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: legacy-perl
+  template:
+    metadata:
+      labels:
+        app: legacy-perl
+    spec:
+      containers:
+      - name: legacy-perl
+        image: legacy-perl-app:latest
+        ports:
+        - containerPort: 8080
+        # Security context: drop all unnecessary privileges
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
