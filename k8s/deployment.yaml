@@ -16,10 +16,9 @@ spec:
     spec:
       containers:
       - name: legacy-perl
-        image: legacy-perl-app:latest
+        image: docker.io/library/legacy-perl-app:latest
+        imagePullPolicy: Never
         ports:
-        - containerPort: 8080
-        # Security context: drop all unnecessary privileges
+        - containerPort: 80
         securityContext:
-          runAsNonRoot: true
           allowPrivilegeEscalation: false
